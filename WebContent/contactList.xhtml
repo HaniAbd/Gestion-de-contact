@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      >
+	
+	
+<h:head>
+    <h:outputStylesheet library="css" name="bootstrap.min.css" />   
+    <title>Gestion De Contact</title>
+    <style type="text/css">
+        .tableUpdated {
+        	width: 90% !important;
+        	margin: 17px 58px 0 !important;
+        	
+        }
+        .btnSpace {
+        	margin: 17px;
+        }     
+    </style>
+</h:head>
+<h:body>
+    <center><h2><h:outputText value="Contacts Records"/></h2></center>
+    <h:form id="studentForm">
+        <h:dataTable  binding="#{table}" value="#{contactBean.contactList()}" var="contact" class="table table-striped table-hover table-bordered tableUpdated">    
+            <h:column>
+                <f:facet name="header" >Id</f:facet>
+                <h:outputText value="#{contact.id}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">Contact Firstname</f:facet>
+                <h:outputText value="#{contact.firstName}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">Contact Lastname</f:facet>
+                <h:outputText value="#{contact.lastName}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">Contact Email</f:facet>
+                <h:outputText value="#{contact.email}" />
+            </h:column>
+            <h:column>
+
+                <h:commandButton action="#{contactBean.editContactRecord(contact.id)}" value="Update" class="btn btn-primary" />
+            </h:column>
+            <h:column>
+                <h:commandButton action="#{contactBean.deleteContactRecord(contact.id)}" value="Delete" class="btn btn-danger" />
+            </h:column>
+        </h:dataTable>
+        <center>
+            <h:commandButton action="add.xhtml?faces-redirect=true" value="Create New Contact" class="btn btn-success btnSpace" />
+        </center>
+    </h:form>
+</h:body>
+</html>
